@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Halant:wght@300&family=Jura&family=Mulish:wght@300&display=swap');
+
+/* 
+font-family: 'Halant', serif;
+font-family: 'Jura', sans-serif;
+font-family: 'Mulish', sans-serif; 
+*/
+
+#logo{
+    margin: 0%;
+    margin-bottom: 20px;
+    margin-top: -20px;
+    font-weight: bold;
+    font-size: 30px;
+    color: #6352AE;
+}
+#rm{
+    width: 10%;
+}
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FCF7FF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 40px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: 'Mulish', sans-serif; 
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+    font-family: 'Jura', sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #3B3086;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #6352AE;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #000000;
+  font-size: 12px;
+}
+.form .message a {
+  color: #3B3086;
+  text-decoration: none;
+}
+
+.info-message{
+  color: #FCF7FF;
+  background-color: #F76261;
+  margin: 0%;
+  padding: 10px 0px;
+}
+
+body {
+  background: #3B3086; /* fallback for old browsers */
+  font-family: 'Mulish', sans-serif; 
+     
+}

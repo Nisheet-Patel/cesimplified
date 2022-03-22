@@ -2,3 +2,6 @@
 Lib
 Scripts
 pyvenv.cfg
+Temp
+database.db
+__pycache__

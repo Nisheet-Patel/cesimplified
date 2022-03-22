@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}CE Simplified{% endblock title%}
+{% block head %}
+    <link rel="stylesheet" href=" {{url_for('static', filename='index-style.css')}}">
+{% endblock head %}
+
+{% block body %}
+
+<h1 id="middle-title">COURSE</h1>
+
+{% for cou in course %}
+<section class="course">
+    
+    <div class="course-title first-color">
+        {{ cou.title }}
+        <span class="iconify icon" data-icon="ri:arrow-drop-down-line" data-width="50"></span>
+    </div>
+    <div class="topic-list">
+        <ul>
+            {% for top in topic %}
+                {% if  top[2] == cou.title %}
+                    <li class='topic-title'><a href="/course/{{ cou.title }}/{{top.id}}">{{ top[1] }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+</section>
+{% endfor %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+
+<script>
+    $(function () {
+        toggleMenu();
+
+        function toggleMenu() {
+            $(".course-title").click(function () {
+                $(this).children().toggleClass("rotate");
+                $(this).next().slideToggle();
+            });
+        }
+    });
+</script>
+
+{% endblock body %}
+
+
+<!-- 
+
+create course
+   Cource Name :> DSA
+
+Create Topic
+   Topic name :> Recursion
+   course name :> DSA 
+
+Add Videos:
+   Video links :> youtube.com/ehakjhd...
+   Topic Name :> Recursion
+ -->

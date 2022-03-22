@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}CE Simplified{% endblock title%}
+
+{% block head %}
+   <link rel="stylesheet" href="{{url_for('static', filename='topic-style.css')}}">
+{% endblock head %}
+
+{% block body %}
+
+   <h1 id="middle-title">{{ topic.title }}</h1>
+   {% for video in videos %}
+      <p align="center" class="topic-list"><a href="#{{ video.vid }}">{{ video.title }}</a></p>
+   {% endfor %}
+
+   {% for video in videos %}
+      <div class="video-container" id="{{ video.vid }}">
+         <p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.vid }}"
+               title="YouTube video player" frameborder="0"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+               allowfullscreen></iframe></p>
+         <p align="center" class="video-title">{{ video.title }}</p>
+      </div>
+   {% endfor %}
+{% endblock body %}

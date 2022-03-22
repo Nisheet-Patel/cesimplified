@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='login-style.css')}} ">
+</head>
+<body>
+
+<div class="login-page">
+  <!-- <p align="center" class="info-message">Username or Password Invalid !</p> -->
+    <div class="form">
+        <p id="logo" align="center">CE Simplified</p>
+
+      <form class="login-form">
+        <input type="text" placeholder="username"/>
+        <input type="password" placeholder="password"/>
+        <input type="checkbox" id="rm" name="remember me" value="Bike">
+        <label for="rm">Remember Me</label>
+        <button>login</button>
+        <p class="message" align="center">Not registered? <a href="#">Contact Us</a></p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
