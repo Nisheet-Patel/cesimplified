@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Halant:wght@300&family=Jura&family=Mulish:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Halant:wght@400&family=Jura&family=Mulish:wght@300&display=swap');
 
 *{
   margin: 0;
@@ -24,6 +24,7 @@ nav .logo{
   font-weight: 600;
   letter-spacing: -1px;
   font-family: 'Jura', sans-serif;
+  text-decoration: none;
 }
 nav .nav-items{
   display: flex;

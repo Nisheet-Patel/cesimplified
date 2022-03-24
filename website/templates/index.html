@@ -20,7 +20,7 @@
         <ul>
             {% for top in topic %}
                 {% if  top[2] == cou.title %}
-                    <li class='topic-title'><a href="/course/{{ cou.title }}/{{top.id}}">{{ top[1] }}</a></li>
+                <a href="/course/{{ cou.title }}/{{top.id}}" class='topic-title'><li >{{ top[1] }}</li></a>
                 {% endif %}
             {% endfor %}
         </ul>
