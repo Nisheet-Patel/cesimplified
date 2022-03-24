@@ -10,17 +10,24 @@
 <body>
 
 <div class="login-page">
-  <!-- <p align="center" class="info-message">Username or Password Invalid !</p> -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+      <p align="center" class="info-message">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+  {% endwith %}
+
     <div class="form">
         <p id="logo" align="center">CE Simplified</p>
 
-      <form class="login-form">
-        <input type="text" placeholder="username"/>
-        <input type="password" placeholder="password"/>
-        <input type="checkbox" id="rm" name="remember me" value="Bike">
+      <form class="login-form" action="/login" method="POST">
+        <input type="text" name="username" placeholder="username"/>
+        <input type="password" name="password" placeholder="password"/>
+        <input type="checkbox" id="rm" name="remember">
         <label for="rm">Remember Me</label>
-        <button>login</button>
-        <p class="message" align="center">Not registered? <a href="#">Contact Us</a></p>
+        <button type="submit">login</button>
+        <p class="message" align="center">Get New <a href="#">Account</a></p>
       </form>
     </div>
   </div>

@@ -2,6 +2,7 @@ import sqlite3
 import os
 import urllib.parse as urlparse
 from pytube import YouTube, Playlist
+from werkzeug.security import generate_password_hash
 
 con = sqlite3.connect('website/database.db')
 
@@ -296,11 +297,24 @@ while True:
 
 
     elif _input == '5':
-        print('''- Manage User
-    [ 1 ]  Add User
-    [ 2 ]  Remove User
-    [ 3 ]  Update User
-    [ 0 ]  Back''')
+        while True:
+            print('''- Manage User
+            [ 1 ]  Add User
+            [ 2 ]  Remove User
+            [ 3 ]  Update User
+            [ 0 ]  Back''')
+            cc = input(":")
+
+            if cc == '1':
+                username = input("Username: ")
+                password = input("Password: ")
+                detail = input("Any Note about User: ")
+                password = generate_password_hash(password, method='sha256')
+                cur.execute(f"INSERT INTO USERS(USERNAME,PASSWORD,DETAIL) VALUES('{username}','{password}','{detail}')")
+                display_row(cur, 'users', f"username='{username}'")
+                commit_changes(cur)
+            elif cc == '0':
+                break
 
     elif _input =='6':
         print('- Run Custom Query')
