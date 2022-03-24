@@ -149,17 +149,13 @@ while True:
 
             elif c_input == '2':
                 title = input("Title: ")
-                course_title = input("Course Title: ") 
-                course_id = cur.execute(F"SELECT ID FROM COURSE WHERE TITLE = '{course_title}';").fetchall()
-                course_id = course_id[0][0] if len(course_id) == 1 else 0
+                course_id = int(input("Course id: "))
                 cur.execute(f"INSERT INTO TOPIC(TITLE,COURSE_ID) VALUES('{title}', {course_id});")
-                display_table(cur, 'topic')
+                display_row(cur, 'topic', f"Title = {title}")
                 commit_changes(cur)
 
             elif c_input == '3':
-                topic_title = input("Topic Title: ") 
-                topic_id = cur.execute(F"SELECT ID FROM TOPIC WHERE TITLE = '{topic_title}';").fetchall()
-                topic_id = topic_id[0][0] if len(topic_id) == 1 else 0
+                topic_id = int(input("Topic id: ")) 
                 print('[ 1 ] Videos Links [ 2 ] Playlist link')
                 vp = input(':')
                 if vp == '1':
@@ -182,7 +178,7 @@ while True:
                         print(f"+ {video_id} | {title}")
                     print('\n')
 
-                display_table(cur, 'videos')
+                display_row(cur, 'videos', f"topic_id = {topic_id}")
                 commit_changes(cur)
             elif c_input == '0':
                 break
@@ -266,6 +262,38 @@ while True:
             elif c_input == '0':
                 break
 
+    elif _input == '4':
+        while True:
+            print('''-  Delete Existing Table Row|Entry
+                [ 1 ]  Course
+                [ 2 ]  Topic
+                [ 3 ]  Videos
+                [ 0 ]  Back''')
+            c_input = input(": ")
+            if c_input == '1':
+                display_table(cur, 'course')
+                id = input('Course id to Delete: ')
+                cur.execute(f"DELETE FROM COURSE WHERE ID = {id}")
+                cur.execute(f"DELETE FROM VIDEOS WHERE topic_id IN (SELECT ID FROM TOPIC WHERE COURSE_ID = {id});")
+                cur.execute(f"DELETE FROM TOPIC WHERE COURSE_ID = {id};")
+                print("Successfully Delete Course with all the topic and videos bellong to course")
+                commit_changes(cur)
+            elif c_input == '2':
+                display_table(cur, 'topic')
+                id = input("Topic id to Delete: ")
+                cur.execute(f"DELETE FROM TOPIC WHERE ID = {id}")
+                cur.execute(f"DELETE FROM VIDEOS WHERE TOPIC_ID = {id}")
+                print("Successfully Deleted Topic with all the videos belong to this Topic")
+                commit_changes(cur)
+            elif c_input == '3':
+                display_table(cur, 'videos')
+                id = input("Enter Video id to Delete: ")
+                cur.execute(f"DELETE FROM VIDEOS WHERE VID = '{id}'")
+                print("Successfully Deleted Video")
+                commit_changes(cur)
+            elif c_input == '0':
+                break
+
 
     elif _input == '5':
         print('''- Manage User
@@ -274,7 +302,7 @@ while True:
     [ 3 ]  Update User
     [ 0 ]  Back''')
 
-    elif _input =='5':
+    elif _input =='6':
         print('- Run Custom Query')
 
 cur.close()
