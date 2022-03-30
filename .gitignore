@@ -5,3 +5,4 @@ pyvenv.cfg
 Temp
 database.db
 __pycache__
+.env
