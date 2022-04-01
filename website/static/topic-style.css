@@ -52,6 +52,7 @@
 
 .video-container iframe {
   transition: 0.25s linear;
+  border-radius: 5px;
 }
 
 .video-container iframe:hover {
