@@ -7,11 +7,33 @@
   align-items: center;
 }
 
+/* Dropdown */
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.icon {
+  transition: 500ms;
+}
+
+#index-bar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: white;
+  background-color: #3b3086;
+  font-family: "Halant", serif;
+  font-size: 25px;
+}
+
 /*  */
 
 .topic-list {
   font-size: 24px;
   font-family: "Halant", serif;
+  margin-top: 10px;
 }
 
 .topic-list a {
@@ -49,6 +71,10 @@
 @media only screen and (max-width: 1160px) {
   .video-container {
     width: 100%;
+  }
+  #middle-title{
+    font-size: 40px;
+    margin: 30px 0px;
   }
 }
 

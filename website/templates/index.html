@@ -12,7 +12,7 @@
 {% for cou in course %}
 <section class="course">
     
-    <div class="course-title first-color">
+    <div class="course-title first-color toogleMenu">
         {{ cou.title }}
         <span class="iconify icon" data-icon="ri:arrow-drop-down-line" data-width="50"></span>
     </div>
@@ -37,7 +37,7 @@
         toggleMenu();
 
         function toggleMenu() {
-            $(".course-title").click(function () {
+            $(".toogleMenu").click(function () {
                 $(this).children().toggleClass("rotate");
                 $(this).next().slideToggle();
             });

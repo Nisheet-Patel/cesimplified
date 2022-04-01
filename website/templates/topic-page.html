@@ -9,9 +9,17 @@
 {% block body %}
 
    <h1 id="middle-title">{{ topic.title }}</h1>
-   {% for video in videos %}
-      <p align="center" class="topic-list"><a href="#{{ video.vid }}">{{ video.title }}</a></p>
-   {% endfor %}
+   <div>
+      <div class="toogleMenu" id="index-bar">
+         Index
+         <span class="iconify icon" data-icon="ri:arrow-drop-down-line" data-width="50"></span>
+      </div>
+      <ol type="1">
+         {% for video in videos %}
+            <li><p align="center" class="topic-list"><a href="#{{ video.vid }}">{{ video.title }}</a></p></li>
+         {% endfor %}
+      </ol>
+   </div> 
 
    {% for video in videos %}
       <div class="video-container" id="{{ video.vid }}">
@@ -22,4 +30,19 @@
          <p align="center" class="video-title">{{ video.title }}</p>
       </div>
    {% endfor %}
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+   <script>
+      $(function () {
+            toggleMenu();
+
+            function toggleMenu() {
+               $(".toogleMenu").click(function () {
+                  $(this).children().toggleClass("rotate");
+                  $(this).next().slideToggle();
+               });
+            }
+      });
+   </script>
 {% endblock body %}
