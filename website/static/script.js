@@ -2,6 +2,9 @@ select_course(document.getElementById("all-topic"), '0');
 
 var pre;
 function select_course(course,id){
+    // Loading Animation
+    document.getElementById("course-container").innerHTML = `<div class="loading"></div>`;
+
     if(pre){
         pre.style.color = '#968AB6';
     }

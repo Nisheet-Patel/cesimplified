@@ -238,3 +238,47 @@ nav .logo.space{
 .content .space{
   margin: 10px 0;
 }
+
+
+/* Loading Block */
+:root {
+  --dark-color: #4534b4;
+  --radius: 64px;
+  --ring-width: 4px;
+}
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* loading element style */
+.loading {
+  width: var(--radius);
+  height: var(--radius);
+  border-radius: 50%;
+  margin-top: 20vh;
+}
+
+.loading:before {
+  display: block;
+  position: relative;
+  left: calc(var(--ring-width) * -1);
+  top: calc(var(--ring-width) * -1);
+  content: ' ';
+  width: var(--radius);
+  height: var(--radius);
+  border-radius: 50%;
+  border: var(--ring-width) solid;
+  border-color: var(--dark-color) transparent transparent transparent;
+  animation: loading-rotate .8s ease-out infinite;
+}
+
+@keyframes loading-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
