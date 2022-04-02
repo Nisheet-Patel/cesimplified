@@ -16,6 +16,8 @@ class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title =  db.Column(db.String(250), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    img_name = db.Column(db.String, nullable=False)
+    total_videos = db.Column(db.Integer, nullable=False)
     videos = db.relationship('Videos', backref='course')
 
 class Videos(db.Model):

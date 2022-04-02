@@ -9,41 +9,20 @@
 
 <h1 id="middle-title">COURSE</h1>
 
-{% for cou in course %}
 <section class="course">
-    
-    <div class="course-title first-color toogleMenu">
-        {{ cou.title }}
-        <span class="iconify icon" data-icon="ri:arrow-drop-down-line" data-width="50"></span>
-    </div>
-    <div class="topic-list">
-        <ul>
-            {% for top in topic %}
-                {% if  top[2] == cou.title %}
-                <a href="/course/{{ cou.title }}/{{top.id}}" class='topic-title'><li >{{ top[1] }}</li></a>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
-
+    <span onclick="select_course(this, '0');" id="all-topic"><u>All</u></span>
+    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+    {% for cou in course %}
+        <span onclick="select_course(this, '{{cou.id}}');"><u>{{cou.title}}</u></span>
+        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+    {% endfor %}
 </section>
-{% endfor %}
+
+<div id="course-container"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
-
-<script>
-    $(function () {
-        toggleMenu();
-
-        function toggleMenu() {
-            $(".toogleMenu").click(function () {
-                $(this).children().toggleClass("rotate");
-                $(this).next().slideToggle();
-            });
-        }
-    });
-</script>
+<script src=" {{url_for('static', filename='script.js')}} "></script>
 
 {% endblock body %}
 
