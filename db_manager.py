@@ -155,7 +155,8 @@ while True:
             elif c_input == '2':
                 title = input("Title: ")
                 course_id = int(input("Course id: "))
-                cur.execute(f"INSERT INTO TOPIC(TITLE,COURSE_ID) VALUES('{title}', {course_id});")
+                image_name = input("Image Name: ")
+                cur.execute(f"INSERT INTO TOPIC(TITLE,COURSE_ID,img_name) VALUES('{title}', {course_id}, '{image_name}');")
                 display_row(cur, 'topic', f"Title = '{title}'")
                 commit_changes(cur)
 
@@ -166,23 +167,27 @@ while True:
                 if vp == '1':
                     video_links = input('YouTube videos links: ')
                     video_links = video_links.split(',')
+                    imgc = 0
                     for link in video_links:
                         video_id = get_yt_video_id(link)
                         title = get_yt_video_title(link)
                         cur.execute(f'''INSERT INTO VIDEOS VALUES("{video_id}", "{title}", "yt", {topic_id});''')
                         print(f"+ {video_id} | {title}")
+                        imgc += 1
+                    cur.execute(f"UPDATE TOPIC SET total_videos = total_videos + {imgc} where id = {topic_id};")
                     print('\n')
                 elif vp == '2':
                     playlist_link = input('Playlist Link: ')
                     playlist_link = get_playlist_video_link(playlist_link)
-
+                    imgc = 0
                     for link in playlist_link:
                         video_id = get_yt_video_id(link)
                         title = get_yt_video_title(link)
                         cur.execute(f'''INSERT INTO VIDEOS VALUES("{video_id}", "{title}", "yt", {topic_id});''')
                         print(f"+ {video_id} | {title}")
+                        imgc += 1
                     print('\n')
-
+                    cur.execute(f"UPDATE TOPIC SET total_videos = total_videos + {imgc} where id = {topic_id};")
                 display_row(cur, 'videos', f"topic_id = {topic_id}")
                 commit_changes(cur)
             elif c_input == '0':
@@ -204,25 +209,31 @@ while True:
                 display_row(cur, 'course', f"ID={id}")
                 commit_changes(cur)
             elif c_input == '2':
-                print('''
-                [ 1 ] Title
-                [ 2 ] Course
-                ''')
-                cc = input(': ')
-                if cc == '1':
-                    display_table(cur, 'topic')
-                    id = input('Input ID: ')
-                    title = input("New Title: ")
-                    cur.execute(f"UPDATE TOPIC SET TITLE = '{title}' WHERE ID = {id};")
-                    display_row(cur, 'course', f"ID={id}")
-                elif cc == '2':
-                    display_table(cur, 'topic')
-                    id = input('Input Topic ID: ')
-                    os.system(CLEAR)
-                    display_table(cur, 'course')
-                    cid = input('New Course ID: ')
-                    cur.execute(f"UPDATE TOPIC SET course_id = {cid} WHERE ID = {id};")
-                    display_row(cur, 'topic', f"ID={id}")
+                Qc = 0
+                Query = '''UPDATE topic SET '''
+                display_table(cur, 'topic')
+                print("\nNOTE: Press [ Enter ] If you don't want to change\n")
+                
+                id = input('Input topic id: ')
+                topic_title = input("New Title: ")
+                img_name = input("New Image Name: ")
+                display_table(cur, 'course')
+                cid = input('New Course id: ')
+
+                if topic_title != '':
+                    add_comma()
+                    Query += f" title = '{topic_title}'"
+                if img_name != '':
+                    add_comma()
+                    Query += f" img_name = '{img_name}'"
+                if cid != '':
+                    add_comma()
+                    Query += f" course_id = {cid}"
+                
+                Query += f" WHERE id = {id};"
+                print(Query)
+                cur.execute(Query)
+                display_row(cur, 'topic', f"ID={id}")
                 commit_changes(cur)
             elif c_input == '3':
                 Qc = 0
@@ -293,12 +304,12 @@ while True:
             elif c_input == '3':
                 display_table(cur, 'videos')
                 id = input("Enter Video id to Delete: ")
+                cur.execute(f"UPDATE TOPIC SET total_videos = total_videos - 1 WHERE id = (select topic_id from videos where vid = {id})")
                 cur.execute(f"DELETE FROM VIDEOS WHERE VID = '{id}'")
                 print("Successfully Deleted Video")
                 commit_changes(cur)
             elif c_input == '0':
                 break
-
 
     elif _input == '5':
         while True:
@@ -323,4 +334,6 @@ while True:
     elif _input =='6':
         print('- Run Custom Query')
 
+    elif _input == '0':
+        break
 cur.close()

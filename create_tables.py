@@ -36,6 +36,8 @@ CREATE TABLE topic (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title VARCHAR(250) NOT NULL,
     course_id INTEGER,
+    img_name VARCHAR2 DEFAULT 'NULL' NOT NULL,
+    total_videos INTEGER DEFAULT 0,
     FOREIGN KEY(course_id) REFERENCES course (id)
 );
 '''
@@ -53,6 +55,10 @@ CREATE TABLE videos (
 );
 '''
 )
+
+# Update New Columns
+#cur.execute(" ALTER TABLE topic ADD img_name VARCHAR2(50) DEFAULT 'NULL' NOT NULL;")
+#cur.execute(" ALTER TABLE topic ADD total_videos INTEGER;")
 
 # for row in cur.execute('SELECT * FROM stocks ORDER BY price'):
 #     print(row)
